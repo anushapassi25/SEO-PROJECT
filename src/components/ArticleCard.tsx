@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Article } from '../types';
-import { Bookmark, Clock, ArrowUpRight, Sparkles } from 'lucide-react';
+import { Bookmark, Clock, ArrowUpRight, Sparkles, ExternalLink } from 'lucide-react';
 
 interface ArticleCardProps {
   article: Article;
@@ -35,7 +35,22 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    onNavigate(`/article/${article.slug}`);
+    if (article.openInNewTab) {
+      window.open(`/article/${article.slug}`, '_blank', 'noopener,noreferrer');
+    } else {
+      onNavigate(`/article/${article.slug}`);
+    }
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      if (article.openInNewTab) {
+        window.open(`/article/${article.slug}`, '_blank', 'noopener,noreferrer');
+      } else {
+        onNavigate(`/article/${article.slug}`);
+      }
+    }
   };
 
   // Give cards varied color personalities based on category
@@ -82,7 +97,11 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
     return (
       <article
         onClick={handleClick}
-        className="group flex gap-4 p-3.5 rounded-xl bg-white border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#ff1493] transition-all cursor-pointer"
+        onKeyDown={handleKeyDown}
+        role="link"
+        tabIndex={0}
+        title={article.openInNewTab ? `${article.title} (Opens in new tab)` : article.title}
+        className="group flex gap-4 p-3.5 rounded-xl bg-white border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#ff1493] transition-all cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-[#ff1493]"
       >
         <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-black relative border-2 border-black">
           {!hasFailed && imgSrc ? (
@@ -107,13 +126,28 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
               </span>
               <span className="text-black font-bold">·</span>
               <span className="text-slate-600 font-bold text-[11px]">{article.readTime}</span>
+              {article.openInNewTab && (
+                <span className="px-1 py-0.2 bg-[#ccff00] text-black text-[9px] font-pixel font-bold rounded border border-black flex items-center gap-0.5">
+                  NEW TAB ↗
+                </span>
+              )}
             </div>
             <h4 className="text-sm font-black text-black group-hover:text-[#ff1493] transition-colors line-clamp-2 leading-snug">
               {article.title}
             </h4>
           </div>
           <span className="text-[11px] text-[#0055ff] font-mono font-bold flex items-center gap-1 mt-1 group-hover:underline">
-            Read story <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            {article.openInNewTab ? (
+              <>
+                <span>Open in new tab</span>
+                <ExternalLink className="w-3 h-3 text-[#ff1493] stroke-[2.5]" />
+              </>
+            ) : (
+              <>
+                <span>Read story</span>
+                <ArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </>
+            )}
           </span>
         </div>
       </article>
@@ -123,7 +157,11 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   return (
     <article
       onClick={handleClick}
-      className={`group relative flex flex-col bg-white border-2 border-black rounded-2xl overflow-hidden shadow-[4px_4px_0px_#000] ${theme.shadowColor} hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-200 cursor-pointer flex-1 justify-between`}
+      onKeyDown={handleKeyDown}
+      role="link"
+      tabIndex={0}
+      title={article.openInNewTab ? `${article.title} (Opens in new tab)` : article.title}
+      className={`group relative flex flex-col bg-white border-2 border-black rounded-2xl overflow-hidden shadow-[4px_4px_0px_#000] ${theme.shadowColor} hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-200 cursor-pointer flex-1 justify-between focus:outline-hidden focus:ring-2 focus:ring-[#ff1493]`}
     >
       {/* Retro OS Window Top Header Motif */}
       <div className={`h-7 px-3 flex items-center justify-between text-[10px] font-mono border-b-2 border-black ${theme.headerBg}`}>
@@ -135,9 +173,16 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
         <span className="truncate max-w-[170px] text-[10px] font-pixel font-bold uppercase tracking-wider text-black">
           {article.category.toLowerCase().replace(/\s+/g, '_')}.log
         </span>
-        <span className="font-pixel text-[9px] font-bold bg-white/70 px-1 py-0.2 rounded border border-black">
-          2026
-        </span>
+        {article.openInNewTab ? (
+          <span className="font-pixel text-[9px] font-bold bg-[#ccff00] text-black px-1.5 py-0.5 rounded border border-black flex items-center gap-0.5">
+            <span>NEW TAB</span>
+            <ExternalLink className="w-2.5 h-2.5 stroke-[2.5]" />
+          </span>
+        ) : (
+          <span className="font-pixel text-[9px] font-bold bg-white/70 px-1 py-0.2 rounded border border-black">
+            2026
+          </span>
+        )}
       </div>
 
       {/* Visual Anchor Frame */}
@@ -220,8 +265,17 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           </div>
 
           <span className="text-xs font-mono text-black font-black flex items-center gap-1 bg-[#ccff00] px-2 py-0.5 rounded border border-black shadow-[1.5px_1.5px_0px_#000] group-hover:bg-[#ff1493] group-hover:text-white transition-colors">
-            Read story
-            <ArrowUpRight className="w-3.5 h-3.5" />
+            {article.openInNewTab ? (
+              <>
+                <span>Open tab</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </>
+            ) : (
+              <>
+                <span>Read story</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </>
+            )}
           </span>
         </div>
       </div>

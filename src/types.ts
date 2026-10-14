@@ -42,6 +42,7 @@ export interface Article {
   };
   keyTakeaways: string[];
   relatedSlugs: string[];
+  openInNewTab?: boolean;
 }
 
 export interface UserComment {

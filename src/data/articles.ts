@@ -91,10 +91,10 @@ export const ARTICLES: Article[] = [
         'As our feeds continue to accelerate, the only enduring currency is adaptability. To be chronically online today is to accept that whatever entertained you at breakfast will likely feel like ancient history by dinner.'
       ]
     },
-    relatedSlugs: ['how-does-a-meme-go-viral', 'what-is-brain-rot-gen-z-slang', 'how-social-media-influences-gen-z-culture']
+    relatedSlugs: ['how-memes-go-viral', 'what-is-brain-rot', 'how-social-media-influences-gen-z-culture']
   },
   {
-    slug: 'what-is-brain-rot-gen-z-slang',
+    slug: 'what-is-brain-rot',
     title: 'What Is Brain Rot? Understanding Gen Z Internet Slang',
     deck: 'From "skibidi" and "fanum tax" to "rizz" and "mewing": why the internet’s most absurd linguistic phenomenon is actually an ironic survival mechanism against content overload.',
     category: 'Digital Linguistics',
@@ -110,6 +110,7 @@ export const ARTICLES: Article[] = [
     wordCount: 950,
     featured: false,
     trendingRank: 2,
+    openInNewTab: true,
     author: {
       name: 'Maya Chen',
       handle: '@mayalinguist',
@@ -170,10 +171,10 @@ export const ARTICLES: Article[] = [
         'When future anthropologists examine the digital artifacts of our century, they will not see brain rot as a symptom of cultural decay, but as a vibrant, kaleidoscopic record of human humor adapting to the most complex media environment in history.'
       ]
     },
-    relatedSlugs: ['how-internet-slang-changed-communication', 'how-does-a-meme-go-viral', 'why-do-internet-trends-die-so-quickly']
+    relatedSlugs: ['how-internet-slang-changed-communication', 'how-memes-go-viral', 'why-do-internet-trends-die-so-quickly']
   },
   {
-    slug: 'how-does-a-meme-go-viral',
+    slug: 'how-memes-go-viral',
     title: 'How Does a Meme Go Viral?',
     deck: 'Behind the curtain of digital memetics: network theory, psychological resonance, remixability, and the elusive tipping points that launch internet jokes into global consciousness.',
     category: 'Meme Ecology',
@@ -189,6 +190,7 @@ export const ARTICLES: Article[] = [
     wordCount: 910,
     featured: false,
     trendingRank: 3,
+    openInNewTab: true,
     author: {
       name: 'Julian Rowe',
       handle: '@julianrowe',
@@ -252,7 +254,7 @@ export const ARTICLES: Article[] = [
     relatedSlugs: ['why-do-internet-trends-die-so-quickly', 'how-internet-slang-changed-communication', 'what-is-an-internet-aesthetic-subcultures']
   },
   {
-    slug: 'why-is-everyone-obsessed-with-nostalgia',
+    slug: 'why-is-everyone-obsessed-with-nostalgia-on-the-internet',
     title: 'Why Is Everyone Obsessed With Nostalgia on the Internet?',
     deck: 'From Y2K flip phones and 2000s digicams to bedroom pop cassette culture: why Gen Z is romanticizing eras they were barely alive to experience.',
     category: 'Online Nostalgia',
@@ -268,6 +270,7 @@ export const ARTICLES: Article[] = [
     wordCount: 880,
     featured: false,
     trendingRank: 4,
+    openInNewTab: true,
     author: {
       name: 'Elena Rostova',
       handle: '@elenaretro',
@@ -487,7 +490,7 @@ export const ARTICLES: Article[] = [
         'Even in the most commercialized corners of the web, young people use aesthetics to build pockets of wonder, storytelling, and emotional resonance.'
       ]
     },
-    relatedSlugs: ['why-is-everyone-obsessed-with-nostalgia', 'how-social-media-influences-gen-z-culture', 'how-does-a-meme-go-viral']
+    relatedSlugs: ['why-is-everyone-obsessed-with-nostalgia-on-the-internet', 'how-social-media-influences-gen-z-culture', 'how-memes-go-viral']
   },
   {
     slug: 'why-are-we-so-attached-to-fictional-characters',
@@ -566,7 +569,7 @@ export const ARTICLES: Article[] = [
         'In the digital age, our screens are simply the new fire circle. Loving a fictional character is not a childish delusion; it is proof of our extraordinary human capacity for boundless empathy.'
       ]
     },
-    relatedSlugs: ['what-is-an-internet-aesthetic-subcultures', 'how-social-media-influences-gen-z-culture', 'why-is-everyone-obsessed-with-nostalgia']
+    relatedSlugs: ['what-is-an-internet-aesthetic-subcultures', 'how-social-media-influences-gen-z-culture', 'why-is-everyone-obsessed-with-nostalgia-on-the-internet']
   },
   {
     slug: 'how-does-cancel-culture-work-in-digital-age',
@@ -803,9 +806,15 @@ export const ARTICLES: Article[] = [
         'Internet slang has not impoverished our communication—it has enriched it, allowing a generation to communicate intimacy, irony, and solidarity at the speed of light.'
       ]
     },
-    relatedSlugs: ['what-is-brain-rot-gen-z-slang', 'how-does-a-meme-go-viral', 'how-social-media-influences-gen-z-culture']
+    relatedSlugs: ['what-is-brain-rot', 'how-memes-go-viral', 'how-social-media-influences-gen-z-culture']
   }
 ];
+
+export const SLUG_ALIASES: Record<string, string> = {
+  'what-is-brain-rot-gen-z-slang': 'what-is-brain-rot',
+  'how-does-a-meme-go-viral': 'how-memes-go-viral',
+  'why-is-everyone-obsessed-with-nostalgia': 'why-is-everyone-obsessed-with-nostalgia-on-the-internet',
+};
 
 export const TOPICS = [
   'All Lore',

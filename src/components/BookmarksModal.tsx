@@ -1,6 +1,6 @@
 import React from 'react';
 import { Article } from '../types';
-import { Bookmark, X, Trash2, ArrowRight } from 'lucide-react';
+import { Bookmark, X, Trash2, ArrowRight, ExternalLink } from 'lucide-react';
 
 interface BookmarksModalProps {
   isOpen: boolean;
@@ -61,11 +61,22 @@ export const BookmarksModal: React.FC<BookmarksModalProps> = ({
                 <div
                   className="flex-1 cursor-pointer"
                   onClick={() => {
-                    onSelectArticle(art.slug);
+                    if (art.openInNewTab) {
+                      window.open(`/article/${art.slug}`, '_blank', 'noopener,noreferrer');
+                    } else {
+                      onSelectArticle(art.slug);
+                    }
                     onClose();
                   }}
                 >
-                  <span className="text-[10px] font-pixel text-[#0055ff] font-bold block mb-1">{art.category}</span>
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <span className="text-[10px] font-pixel text-[#0055ff] font-bold block">{art.category}</span>
+                    {art.openInNewTab && (
+                      <span className="text-[9px] font-pixel text-black bg-[#ccff00] border border-black px-1 rounded flex items-center gap-0.5">
+                        NEW TAB <ExternalLink className="w-2.5 h-2.5" />
+                      </span>
+                    )}
+                  </div>
                   <h4 className="text-sm font-black text-black group-hover:text-[#ff1493] transition-colors leading-snug">
                     {art.title}
                   </h4>

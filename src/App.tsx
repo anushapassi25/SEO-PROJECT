@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
-import { ARTICLES } from './data/articles';
+import { ARTICLES, SLUG_ALIASES } from './data/articles';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
@@ -71,8 +71,8 @@ export default function App() {
     });
   };
 
-  // Navigate function with HTML5 pushState
-  const navigateTo = (path: string) => {
+  // Navigate function with HTML5 pushState & new-tab handling for designated articles
+  const navigateTo = (path: string, forceNewTab?: boolean) => {
     // If it's a hash anchor on the same page
     if (path.startsWith('/#')) {
       if (currentPath !== '/') {
@@ -84,6 +84,25 @@ export default function App() {
         const elem = document.getElementById(id);
         if (elem) elem.scrollIntoView({ behavior: 'smooth' });
       }, 50);
+      return;
+    }
+
+    if (path.startsWith('/article/')) {
+      const rawSlug = path.replace('/article/', '').split('?')[0].split('#')[0];
+      const targetSlug = SLUG_ALIASES[rawSlug] || rawSlug;
+      const targetArticle = ARTICLES.find((a) => a.slug === targetSlug);
+      const canonicalPath = `/article/${targetSlug}`;
+
+      if (forceNewTab || targetArticle?.openInNewTab) {
+        window.open(canonicalPath, '_blank', 'noopener,noreferrer');
+        return;
+      }
+
+      if (window.location.pathname !== canonicalPath) {
+        window.history.pushState({}, '', canonicalPath);
+      }
+      setCurrentPath(canonicalPath);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
@@ -109,8 +128,14 @@ export default function App() {
       />
     );
   } else if (currentPath.startsWith('/article/')) {
-    const slug = currentPath.replace('/article/', '').split('?')[0].split('#')[0];
+    const rawSlug = currentPath.replace('/article/', '').split('?')[0].split('#')[0];
+    const slug = SLUG_ALIASES[rawSlug] || rawSlug;
     const article = ARTICLES.find((a) => a.slug === slug);
+
+    // If an alias was accessed directly, seamlessly sync URL bar to canonical new URL
+    if (SLUG_ALIASES[rawSlug] && typeof window !== 'undefined' && window.location.pathname !== `/article/${slug}`) {
+      window.history.replaceState({}, '', `/article/${slug}`);
+    }
 
     if (article) {
       pageContent = (

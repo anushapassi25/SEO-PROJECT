@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Article } from '../types';
-import { Search, X, ArrowRight, Clock, Star } from 'lucide-react';
+import { Search, X, ArrowRight, Clock, Star, ExternalLink } from 'lucide-react';
 
 interface SearchModalProps {
   isOpen: boolean;
@@ -116,13 +116,24 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   <button
                     key={art.slug}
                     onClick={() => {
-                      onSelectArticle(art.slug);
+                      if (art.openInNewTab) {
+                        window.open(`/article/${art.slug}`, '_blank', 'noopener,noreferrer');
+                      } else {
+                        onSelectArticle(art.slug);
+                      }
                       onClose();
                     }}
                     className="w-full text-left p-2.5 rounded-lg bg-[#f8fafc] border border-black hover:bg-[#ccff00] flex items-center justify-between text-xs text-black group transition-colors shadow-[1.5px_1.5px_0px_#000]"
                   >
                     <span className="font-bold font-mono truncate pr-4">{art.title}</span>
-                    <span className="text-[#0055ff] font-pixel shrink-0 font-bold">{art.readTime}</span>
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      {art.openInNewTab && (
+                        <span className="text-[9px] font-pixel text-[#ff1493] bg-pink-100 border border-pink-400 px-1 py-0.2 rounded flex items-center gap-0.5">
+                          NEW TAB <ExternalLink className="w-2.5 h-2.5" />
+                        </span>
+                      )}
+                      <span className="text-[#0055ff] font-pixel font-bold">{art.readTime}</span>
+                    </div>
                   </button>
                 ))}
               </div>
@@ -145,7 +156,11 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 <div
                   key={art.slug}
                   onClick={() => {
-                    onSelectArticle(art.slug);
+                    if (art.openInNewTab) {
+                      window.open(`/article/${art.slug}`, '_blank', 'noopener,noreferrer');
+                    } else {
+                      onSelectArticle(art.slug);
+                    }
                     onClose();
                   }}
                   className="p-3.5 rounded-xl bg-white border-2 border-black hover:bg-[#fbcfe8] cursor-pointer transition-all flex items-start justify-between gap-4 group shadow-[2px_2px_0px_#000]"
@@ -155,13 +170,22 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                       <span className="text-[#0055ff]">{art.category}</span>
                       <span className="text-black">·</span>
                       <span className="text-slate-600">{art.readTime}</span>
+                      {art.openInNewTab && (
+                        <span className="text-[9px] font-pixel text-black bg-[#ccff00] border border-black px-1 rounded flex items-center gap-0.5">
+                          NEW TAB <ExternalLink className="w-2.5 h-2.5" />
+                        </span>
+                      )}
                     </div>
                     <h4 className="text-sm font-black text-black group-hover:text-[#ff1493] transition-colors leading-snug">
                       {art.title}
                     </h4>
                     <p className="text-xs text-slate-700 line-clamp-1 mt-1 font-medium">{art.deck}</p>
                   </div>
-                  <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-all shrink-0 mt-2" />
+                  {art.openInNewTab ? (
+                    <ExternalLink className="w-4 h-4 text-[#ff1493] group-hover:scale-110 transition-all shrink-0 mt-2" />
+                  ) : (
+                    <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-all shrink-0 mt-2" />
+                  )}
                 </div>
               ))
             )}

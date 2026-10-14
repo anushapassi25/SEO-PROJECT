@@ -26,7 +26,11 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ featuredArticle, onNavig
 
   const handleReadClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    onNavigate(`/article/${featuredArticle.slug}`);
+    if (featuredArticle.openInNewTab) {
+      window.open(`/article/${featuredArticle.slug}`, '_blank', 'noopener,noreferrer');
+    } else {
+      onNavigate(`/article/${featuredArticle.slug}`);
+    }
   };
 
   return (
