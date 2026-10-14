@@ -113,17 +113,19 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               </span>
               <div className="space-y-2">
                 {articles.slice(0, 3).map((art) => (
-                  <button
+                  <a
                     key={art.slug}
-                    onClick={() => {
-                      if (art.openInNewTab) {
-                        window.open(`/article/${art.slug}`, '_blank', 'noopener,noreferrer');
-                      } else {
+                    href={`/article/${art.slug}`}
+                    target={art.openInNewTab ? '_blank' : undefined}
+                    rel={art.openInNewTab ? 'noopener noreferrer' : undefined}
+                    onClick={(e) => {
+                      if (!art.openInNewTab) {
+                        e.preventDefault();
                         onSelectArticle(art.slug);
                       }
                       onClose();
                     }}
-                    className="w-full text-left p-2.5 rounded-lg bg-[#f8fafc] border border-black hover:bg-[#ccff00] flex items-center justify-between text-xs text-black group transition-colors shadow-[1.5px_1.5px_0px_#000]"
+                    className="w-full text-left p-2.5 rounded-lg bg-[#f8fafc] border border-black hover:bg-[#ccff00] flex items-center justify-between text-xs text-black group transition-colors shadow-[1.5px_1.5px_0px_#000] no-underline block"
                   >
                     <span className="font-bold font-mono truncate pr-4">{art.title}</span>
                     <div className="flex items-center gap-1.5 shrink-0">
@@ -134,7 +136,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                       )}
                       <span className="text-[#0055ff] font-pixel font-bold">{art.readTime}</span>
                     </div>
-                  </button>
+                  </a>
                 ))}
               </div>
             </div>
@@ -153,17 +155,19 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               </div>
             ) : (
               filtered.map((art) => (
-                <div
+                <a
                   key={art.slug}
-                  onClick={() => {
-                    if (art.openInNewTab) {
-                      window.open(`/article/${art.slug}`, '_blank', 'noopener,noreferrer');
-                    } else {
+                  href={`/article/${art.slug}`}
+                  target={art.openInNewTab ? '_blank' : undefined}
+                  rel={art.openInNewTab ? 'noopener noreferrer' : undefined}
+                  onClick={(e) => {
+                    if (!art.openInNewTab) {
+                      e.preventDefault();
                       onSelectArticle(art.slug);
                     }
                     onClose();
                   }}
-                  className="p-3.5 rounded-xl bg-white border-2 border-black hover:bg-[#fbcfe8] cursor-pointer transition-all flex items-start justify-between gap-4 group shadow-[2px_2px_0px_#000]"
+                  className="p-3.5 rounded-xl bg-white border-2 border-black hover:bg-[#fbcfe8] cursor-pointer transition-all flex items-start justify-between gap-4 group shadow-[2px_2px_0px_#000] no-underline text-inherit block"
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 text-xs font-mono mb-1 font-bold">
@@ -186,7 +190,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   ) : (
                     <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-all shrink-0 mt-2" />
                   )}
-                </div>
+                </a>
               ))
             )}
           </div>

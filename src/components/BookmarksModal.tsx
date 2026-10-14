@@ -58,12 +58,14 @@ export const BookmarksModal: React.FC<BookmarksModalProps> = ({
                 key={art.slug}
                 className="p-3.5 rounded-xl bg-white border-2 border-black hover:border-[#ff1493] flex items-start justify-between gap-3 group transition-all shadow-[3px_3px_0px_#000]"
               >
-                <div
-                  className="flex-1 cursor-pointer"
-                  onClick={() => {
-                    if (art.openInNewTab) {
-                      window.open(`/article/${art.slug}`, '_blank', 'noopener,noreferrer');
-                    } else {
+                <a
+                  href={`/article/${art.slug}`}
+                  target={art.openInNewTab ? '_blank' : undefined}
+                  rel={art.openInNewTab ? 'noopener noreferrer' : undefined}
+                  className="flex-1 cursor-pointer no-underline text-inherit block"
+                  onClick={(e) => {
+                    if (!art.openInNewTab) {
+                      e.preventDefault();
                       onSelectArticle(art.slug);
                     }
                     onClose();
@@ -81,7 +83,7 @@ export const BookmarksModal: React.FC<BookmarksModalProps> = ({
                     {art.title}
                   </h4>
                   <span className="text-xs text-slate-600 font-mono mt-1 block font-bold">{art.readTime}</span>
-                </div>
+                </a>
                 <div className="flex items-center gap-1 shrink-0 pt-1">
                   <button
                     onClick={() => onRemoveBookmark(art.slug)}

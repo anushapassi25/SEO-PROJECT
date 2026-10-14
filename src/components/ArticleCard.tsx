@@ -34,22 +34,26 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   };
 
   const handleClick = (e: React.MouseEvent) => {
-    e.preventDefault();
     if (article.openInNewTab) {
-      window.open(`/article/${article.slug}`, '_blank', 'noopener,noreferrer');
-    } else {
-      onNavigate(`/article/${article.slug}`);
+      // Allow browser to natively open the article in a new separate tab
+      // Do NOT prevent default so native <a target="_blank"> works reliably
+      return;
     }
+    e.preventDefault();
+    onNavigate(`/article/${article.slug}`);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
       if (article.openInNewTab) {
-        window.open(`/article/${article.slug}`, '_blank', 'noopener,noreferrer');
-      } else {
-        onNavigate(`/article/${article.slug}`);
+        if (e.key === ' ') {
+          e.preventDefault();
+          window.open(`/article/${article.slug}`, '_blank', 'noopener,noreferrer');
+        }
+        return;
       }
+      e.preventDefault();
+      onNavigate(`/article/${article.slug}`);
     }
   };
 
@@ -95,13 +99,14 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
   if (variant === 'compact') {
     return (
-      <article
+      <a
+        href={`/article/${article.slug}`}
+        target={article.openInNewTab ? '_blank' : undefined}
+        rel={article.openInNewTab ? 'noopener noreferrer' : undefined}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
-        role="link"
-        tabIndex={0}
-        title={article.openInNewTab ? `${article.title} (Opens in new tab)` : article.title}
-        className="group flex gap-4 p-3.5 rounded-xl bg-white border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#ff1493] transition-all cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-[#ff1493]"
+        title={article.openInNewTab ? `${article.title} (Opens in new separate tab)` : article.title}
+        className="group flex gap-4 p-3.5 rounded-xl bg-white border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#ff1493] transition-all cursor-pointer focus:outline-hidden focus:ring-2 focus:ring-[#ff1493] no-underline text-inherit block"
       >
         <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-black relative border-2 border-black">
           {!hasFailed && imgSrc ? (
@@ -150,18 +155,19 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
             )}
           </span>
         </div>
-      </article>
+      </a>
     );
   }
 
   return (
-    <article
+    <a
+      href={`/article/${article.slug}`}
+      target={article.openInNewTab ? '_blank' : undefined}
+      rel={article.openInNewTab ? 'noopener noreferrer' : undefined}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      role="link"
-      tabIndex={0}
-      title={article.openInNewTab ? `${article.title} (Opens in new tab)` : article.title}
-      className={`group relative flex flex-col bg-white border-2 border-black rounded-2xl overflow-hidden shadow-[4px_4px_0px_#000] ${theme.shadowColor} hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-200 cursor-pointer flex-1 justify-between focus:outline-hidden focus:ring-2 focus:ring-[#ff1493]`}
+      title={article.openInNewTab ? `${article.title} (Opens in new separate tab)` : article.title}
+      className={`group relative flex flex-col bg-white border-2 border-black rounded-2xl overflow-hidden shadow-[4px_4px_0px_#000] ${theme.shadowColor} hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-200 cursor-pointer flex-1 justify-between focus:outline-hidden focus:ring-2 focus:ring-[#ff1493] no-underline text-inherit`}
     >
       {/* Retro OS Window Top Header Motif */}
       <div className={`h-7 px-3 flex items-center justify-between text-[10px] font-mono border-b-2 border-black ${theme.headerBg}`}>
@@ -279,6 +285,6 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
           </span>
         </div>
       </div>
-    </article>
+    </a>
   );
 };

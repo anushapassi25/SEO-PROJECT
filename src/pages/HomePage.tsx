@@ -6,7 +6,7 @@ import { ArticleCard } from '../components/ArticleCard';
 import { AeoFaqSection } from '../components/AeoFaqSection';
 import { NewsletterSticker } from '../components/NewsletterSticker';
 import { TOPICS } from '../data/articles';
-import { TrendingUp, Layers, ArrowRight, Sparkles, Star, Zap } from 'lucide-react';
+import { TrendingUp, Layers, ArrowRight, Sparkles, Star, Zap, ExternalLink } from 'lucide-react';
 
 interface HomePageProps {
   articles: Article[];
@@ -58,6 +58,51 @@ export const HomePage: React.FC<HomePageProps> = ({
             <span className="text-xs font-mono font-bold text-purple-900 bg-white/80 px-2.5 py-1 rounded border border-black shadow-[1.5px_1.5px_0px_#000]">
               RANKED BY ALGORITHMIC VELOCITY
             </span>
+          </div>
+
+          {/* Quick Tab Launcher Ribbon for the 3 distinct articles */}
+          <div className="mb-8 p-3.5 bg-white rounded-xl border-2 border-black shadow-[3px_3px_0px_#000] flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#27c93f] border border-black animate-pulse" />
+              <span className="font-pixel text-xs text-black font-bold">
+                MULTI-TAB ESSAYS:
+              </span>
+              <span className="text-[11px] font-mono text-slate-700">
+                Click any dispatch card below or these direct tab links to open each in a different separate tab:
+              </span>
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <a
+                href="/article/what-is-brain-rot"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2.5 py-1 bg-[#ccff00] hover:bg-[#b8e600] text-black text-xs font-mono font-black rounded border border-black shadow-[1.5px_1.5px_0px_#000] flex items-center gap-1 transition-transform hover:-translate-y-0.5"
+                title="Open 'What is Brain Rot' in a new separate tab"
+              >
+                <span>1. Brain Rot ↗</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+              <a
+                href="/article/how-memes-go-viral"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2.5 py-1 bg-[#00f0ff] hover:bg-[#00d8e6] text-black text-xs font-mono font-black rounded border border-black shadow-[1.5px_1.5px_0px_#000] flex items-center gap-1 transition-transform hover:-translate-y-0.5"
+                title="Open 'How Does a Meme Go Viral' in a new separate tab"
+              >
+                <span>2. Viral Memes ↗</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+              <a
+                href="/article/why-is-everyone-obsessed-with-nostalgia-on-the-internet"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-2.5 py-1 bg-[#ffd700] hover:bg-[#e6c200] text-black text-xs font-mono font-black rounded border border-black shadow-[1.5px_1.5px_0px_#000] flex items-center gap-1 transition-transform hover:-translate-y-0.5"
+                title="Open 'Why Is Everyone Obsessed With Nostalgia on the Internet?' in a new separate tab"
+              >
+                <span>3. Internet Nostalgia ↗</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
