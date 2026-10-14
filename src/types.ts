@@ -22,6 +22,7 @@ export interface Article {
   seoTitle: string;
   metaDescription: string;
   heroImage: string;
+  fallbackImage?: string;
   imageAlt: string;
   author: {
     name: string;

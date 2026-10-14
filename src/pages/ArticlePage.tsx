@@ -41,7 +41,21 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
   const [likes, setLikes] = useState(142);
   const [hasLiked, setHasLiked] = useState(false);
   const [fontSize, setFontSize] = useState<'normal' | 'large' | 'xlarge'>('normal');
-  const [imgError, setImgError] = useState(false);
+  const [imgSrc, setImgSrc] = useState<string>(article.heroImage || article.fallbackImage || '');
+  const [hasFailed, setHasFailed] = useState<boolean>(false);
+
+  useEffect(() => {
+    setImgSrc(article.heroImage || article.fallbackImage || '');
+    setHasFailed(false);
+  }, [article.heroImage, article.fallbackImage]);
+
+  const handleImgError = () => {
+    if (article.fallbackImage && imgSrc !== article.fallbackImage) {
+      setImgSrc(article.fallbackImage);
+    } else {
+      setHasFailed(true);
+    }
+  };
 
   // Comments state
   const [comments, setComments] = useState<UserComment[]>([
@@ -327,12 +341,11 @@ export const ArticlePage: React.FC<ArticlePageProps> = ({
           </div>
 
           <div className="aspect-16/9 w-full overflow-hidden bg-slate-900">
-            {!imgError ? (
+            {!hasFailed && imgSrc ? (
               <img
-                src={article.heroImage}
-                alt={article.imageAlt}
-                referrerPolicy="no-referrer"
-                onError={() => setImgError(true)}
+                src={imgSrc}
+                alt={article.imageAlt || article.title}
+                onError={handleImgError}
                 className="w-full h-full object-cover"
               />
             ) : (

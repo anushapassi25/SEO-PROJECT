@@ -8,7 +8,21 @@ interface HeroBannerProps {
 }
 
 export const HeroBanner: React.FC<HeroBannerProps> = ({ featuredArticle, onNavigate }) => {
-  const [imgError, setImgError] = useState(false);
+  const [imgSrc, setImgSrc] = useState<string>(featuredArticle.heroImage || featuredArticle.fallbackImage || '');
+  const [hasFailed, setHasFailed] = useState<boolean>(false);
+
+  React.useEffect(() => {
+    setImgSrc(featuredArticle.heroImage || featuredArticle.fallbackImage || '');
+    setHasFailed(false);
+  }, [featuredArticle.heroImage, featuredArticle.fallbackImage]);
+
+  const handleImgError = () => {
+    if (featuredArticle.fallbackImage && imgSrc !== featuredArticle.fallbackImage) {
+      setImgSrc(featuredArticle.fallbackImage);
+    } else {
+      setHasFailed(true);
+    }
+  };
 
   const handleReadClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -167,12 +181,11 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({ featuredArticle, onNavig
 
               {/* Graphic Asset Container */}
               <div className="aspect-4/3 sm:aspect-16/10 lg:aspect-4/3 w-full overflow-hidden bg-black relative">
-                {!imgError ? (
+                {!hasFailed && imgSrc ? (
                   <img
-                    src={featuredArticle.heroImage}
-                    alt={featuredArticle.imageAlt}
-                    referrerPolicy="no-referrer"
-                    onError={() => setImgError(true)}
+                    src={imgSrc}
+                    alt={featuredArticle.imageAlt || featuredArticle.title}
+                    onError={handleImgError}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                 ) : (

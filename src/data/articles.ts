@@ -1,4 +1,17 @@
 import { Article } from '../types';
+import internetTrendsImg from '../assets/images/internet_trends_speed_1791958170561.jpg';
+import brainrotSlangImg from '../assets/images/brainrot_slang_linguistics_1791958171391.jpg';
+import viralMemeImg from '../assets/images/viral_meme_network_1791958204387.jpg';
+import retroNostalgiaImg from '../assets/images/retro_digital_nostalgia_1791958173519.jpg';
+import socialMediaImg from '../assets/images/social_media_influence_genz_1791958250215.jpg';
+import aestheticsImg from '../assets/images/internet_aesthetics_subcultures_1791958203855.jpg';
+import fictionalAttachmentImg from '../assets/images/fictional_character_attachment_1791958204630.jpg';
+import cancelCultureImg from '../assets/images/cancel_culture_digital_age_1791958249855.jpg';
+import doomscrollingImg from '../assets/images/doomscrolling_glow_1791958204608.jpg';
+import slangEvolutionImg from '../assets/images/internet_slang_evolution_1791958248658.jpg';
+import heroCoverImg from '../assets/images/hero_magazine_cover_1791958170253.jpg';
+
+export { heroCoverImg };
 
 export const ARTICLES: Article[] = [
   {
@@ -10,7 +23,8 @@ export const ARTICLES: Article[] = [
     relatedKeywords: ['viral micro-trends', 'TikTok trend cycle'],
     seoTitle: 'Why Do Internet Trends Die So Quickly? | Chronically Online',
     metaDescription: 'Explore why modern internet trends decay in days instead of years, analyzing algorithmic oversaturation, brand cringe, and digital fatigue.',
-    heroImage: '/src/assets/images/internet_trends_speed_1791958170561.jpg',
+    heroImage: internetTrendsImg,
+    fallbackImage: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Editorial conceptual hourglass filled with glowing blue pixels and digital binary data, representing rapid trend obsolescence',
     publishedAt: 'October 12, 2026',
     readTime: '7 min read',
@@ -88,7 +102,8 @@ export const ARTICLES: Article[] = [
     relatedKeywords: ['Gen Z slang glossary', 'internet brainrot culture'],
     seoTitle: 'What Is Brain Rot? Gen Z Slang Decoded | Chronically Online',
     metaDescription: 'A comprehensive linguistic breakdown of internet brain rot, explaining terms like rizz, fanum tax, and skibidi through sociological and meme theory.',
-    heroImage: '/src/assets/images/brainrot_slang_linguistics_1791958171391.jpg',
+    heroImage: brainrotSlangImg,
+    fallbackImage: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Pop-art surreal digital collage showing floating chrome emojis, glowing speech bubbles, and Gen Z slang iconography',
     publishedAt: 'October 11, 2026',
     readTime: '8 min read',
@@ -166,7 +181,8 @@ export const ARTICLES: Article[] = [
     relatedKeywords: ['viral meme mechanics', 'internet memetics theory'],
     seoTitle: 'How Does a Meme Go Viral? Memetics & Network Science | Chronically Online',
     metaDescription: 'Discover the exact anatomy of viral memes, from template remixability and emotional resonance to algorithmic distribution pathways.',
-    heroImage: '/src/assets/images/viral_meme_network_1791958204387.jpg',
+    heroImage: viralMemeImg,
+    fallbackImage: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Digital glowing cybernetic network visualization with floating meme icons, arrows, and nodes showing viral distribution',
     publishedAt: 'October 10, 2026',
     readTime: '8 min read',
@@ -244,7 +260,8 @@ export const ARTICLES: Article[] = [
     relatedKeywords: ['Y2K aesthetic revival', 'anemoia digital culture'],
     seoTitle: 'Why Is Everyone Obsessed With Nostalgia on the Internet? | Chronically Online',
     metaDescription: 'Explore the psychological and cultural drivers behind the internet’s obsession with early digital nostalgia, retro tech, and anemoia.',
-    heroImage: '/src/assets/images/retro_digital_nostalgia_1791958173519.jpg',
+    heroImage: retroNostalgiaImg,
+    fallbackImage: 'https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Nostalgic bedroom with translucent turquoise vintage iMac computer, CD-ROMs, floppy disks, and warm retro fairy lights',
     publishedAt: 'October 09, 2026',
     readTime: '7 min read',
@@ -323,7 +340,8 @@ export const ARTICLES: Article[] = [
     relatedKeywords: ['Gen Z digital identity', 'algorithm youth culture'],
     seoTitle: 'How Does Social Media Influence Gen Z Culture? | Chronically Online',
     metaDescription: 'A deep cultural investigation into how ubiquitous social media platforms shaped Gen Z values, social dynamics, career aspirations, and worldview.',
-    heroImage: '/src/assets/images/social_media_influence_genz_1791958250215.jpg',
+    heroImage: socialMediaImg,
+    fallbackImage: 'https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Group of stylish Gen Z creators filming editorial content together with ring lights, smartphones, and urban cyber neon backdrop',
     publishedAt: 'October 08, 2026',
     readTime: '8 min read',
@@ -401,7 +419,8 @@ export const ARTICLES: Article[] = [
     relatedKeywords: ['online subcultures guide', 'aesthetic core phenomenon'],
     seoTitle: 'What Is an Internet Aesthetic? Online Subcultures Guide | Chronically Online',
     metaDescription: 'A field guide to internet aesthetic subcultures, analyzing the evolution from Tumblr moodboards to TikTok cores and identity packaging.',
-    heroImage: '/src/assets/images/internet_aesthetics_subcultures_1791958203855.jpg',
+    heroImage: aestheticsImg,
+    fallbackImage: 'https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Editorial artistic collage showcasing internet subcultures, weirdcore liminal spaces, digital fairy wings, and chrome jewelry',
     publishedAt: 'October 07, 2026',
     readTime: '8 min read',
@@ -479,7 +498,8 @@ export const ARTICLES: Article[] = [
     relatedKeywords: ['parasocial relationships fiction', 'comfort character psychology'],
     seoTitle: 'Why Are We So Attached to Fictional Characters? | Chronically Online',
     metaDescription: 'An emotional and psychological examination of why digital fans develop deep parasocial bonds with fictional characters and online narratives.',
-    heroImage: '/src/assets/images/fictional_character_attachment_1791958204630.jpg',
+    heroImage: fictionalAttachmentImg,
+    fallbackImage: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Surreal editorial scene of a young person on a sofa reaching toward an ethereal glowing holographic fictional character silhouette',
     publishedAt: 'October 06, 2026',
     readTime: '7 min read',
@@ -557,7 +577,8 @@ export const ARTICLES: Article[] = [
     relatedKeywords: ['online accountability dynamics', 'cancel culture psychology'],
     seoTitle: 'How Does Cancel Culture Work in the Digital Age? | Chronically Online',
     metaDescription: 'A balanced sociotechnical analysis of digital callout culture, viral accountability campaigns, algorithms, and the psychology of public shaming.',
-    heroImage: '/src/assets/images/cancel_culture_digital_age_1791958249855.jpg',
+    heroImage: cancelCultureImg,
+    fallbackImage: 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Editorial conceptual collage showing digital callout receipts under a glowing magnifying glass with broken glass and cyber blue accents',
     publishedAt: 'October 05, 2026',
     readTime: '9 min read',
@@ -635,7 +656,8 @@ export const ARTICLES: Article[] = [
     relatedKeywords: ['doomscrolling psychology', 'stop mindless scrolling'],
     seoTitle: 'Why Do We Keep Doomscrolling? The Psychology of Digital Dread | Chronically Online',
     metaDescription: 'Unpack the psychological and neurochemical reasons behind doomscrolling, and learn evidence-based strategies to break the algorithmic loop.',
-    heroImage: '/src/assets/images/doomscrolling_glow_1791958204608.jpg',
+    heroImage: doomscrollingImg,
+    fallbackImage: 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Moody editorial photograph of a young person in the dark illuminated by an endless cascading blue smartphone feed',
     publishedAt: 'October 04, 2026',
     readTime: '8 min read',
@@ -713,7 +735,8 @@ export const ARTICLES: Article[] = [
     relatedKeywords: ['digital linguistic evolution', 'Gen Z communication patterns'],
     seoTitle: 'How Has Internet Slang Changed the Way We Communicate? | Chronically Online',
     metaDescription: 'Explore the profound linguistic shifts driven by internet slang, from emotional tone indicators to the mainstreaming of digital vernacular.',
-    heroImage: '/src/assets/images/internet_slang_evolution_1791958248658.jpg',
+    heroImage: slangEvolutionImg,
+    fallbackImage: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1200&q=80',
     imageAlt: 'Editorial graphic showing typography letters morphing into electric blue digital glyphs and floating chrome keyboard keys',
     publishedAt: 'October 03, 2026',
     readTime: '8 min read',

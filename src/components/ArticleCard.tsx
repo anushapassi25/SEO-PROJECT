@@ -17,7 +17,21 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
   onToggleBookmark,
   variant = 'standard',
 }) => {
-  const [imgError, setImgError] = useState(false);
+  const [imgSrc, setImgSrc] = useState<string>(article.heroImage || article.fallbackImage || '');
+  const [hasFailed, setHasFailed] = useState<boolean>(false);
+
+  React.useEffect(() => {
+    setImgSrc(article.heroImage || article.fallbackImage || '');
+    setHasFailed(false);
+  }, [article.heroImage, article.fallbackImage]);
+
+  const handleImgError = () => {
+    if (article.fallbackImage && imgSrc !== article.fallbackImage) {
+      setImgSrc(article.fallbackImage);
+    } else {
+      setHasFailed(true);
+    }
+  };
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -71,12 +85,11 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
         className="group flex gap-4 p-3.5 rounded-xl bg-white border-2 border-black shadow-[3px_3px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[5px_5px_0px_#ff1493] transition-all cursor-pointer"
       >
         <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden bg-black relative border-2 border-black">
-          {!imgError ? (
+          {!hasFailed && imgSrc ? (
             <img
-              src={article.heroImage}
-              alt={article.imageAlt}
-              referrerPolicy="no-referrer"
-              onError={() => setImgError(true)}
+              src={imgSrc}
+              alt={article.imageAlt || article.title}
+              onError={handleImgError}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
               loading="lazy"
             />
@@ -129,12 +142,11 @@ export const ArticleCard: React.FC<ArticleCardProps> = ({
 
       {/* Visual Anchor Frame */}
       <div className="relative aspect-16/10 w-full overflow-hidden bg-slate-900 border-b-2 border-black">
-        {!imgError ? (
+        {!hasFailed && imgSrc ? (
           <img
-            src={article.heroImage}
-            alt={article.imageAlt}
-            referrerPolicy="no-referrer"
-            onError={() => setImgError(true)}
+            src={imgSrc}
+            alt={article.imageAlt || article.title}
+            onError={handleImgError}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
             loading="lazy"
           />
