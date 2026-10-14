@@ -1,0 +1,6 @@
+{
+  "name": "chronically online",
+  "description": "Editorial digital magazine exploring Gen Z internet culture, viral trends, memes, slang, social media behavior, and online nostalgia.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
